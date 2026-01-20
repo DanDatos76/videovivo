@@ -1,7 +1,8 @@
  "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
-import AgoraRTC, { IAgoraRTCClient, IRemoteUser } from "agora-rtc-sdk-ng";
+// CORRECCIÓN: Usamos IAgoraRTCRemoteUser
+import AgoraRTC, { IAgoraRTCClient, IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import '../styles/visor.css';
 import { Eye, Radio, ShieldCheck, LogOut, Activity } from 'lucide-react';
 
@@ -15,13 +16,16 @@ export default function VisorPage() {
   const [client, setClient] = useState<IAgoraRTCClient | null>(null);
   const videoRef = useRef<HTMLDivElement>(null);
 
-  // Función para procesar la señal de video
-  const subscribeUser = async (user: IRemoteUser, mediaType: "video" | "audio", agoraClient: IAgoraRTCClient) => {
+  // CORRECCIÓN: Tipo de dato IAgoraRTCRemoteUser y validación de mediaType
+  const subscribeUser = async (
+    user: IAgoraRTCRemoteUser, 
+    mediaType: "video" | "audio", 
+    agoraClient: IAgoraRTCClient
+  ) => {
     await agoraClient.subscribe(user, mediaType);
 
     if (mediaType === "video") {
       setHostActive(true);
-      // Pequeño delay para asegurar que React renderizó el div de video
       setTimeout(() => {
         if (videoRef.current) {
           user.videoTrack?.play(videoRef.current);
@@ -38,8 +42,13 @@ export default function VisorPage() {
       const agoraClient = AgoraRTC.createClient({ mode: "live", codec: "vp8" });
       await agoraClient.setClientRole("audience");
 
-      // Eventos de red
-      agoraClient.on("user-published", (user, mediaType) => subscribeUser(user, mediaType, agoraClient));
+      // CORRECCIÓN: Filtramos mediaType para evitar el error de "datachannel"
+      agoraClient.on("user-published", async (user, mediaType) => {
+        if (mediaType === "video" || mediaType === "audio") {
+          await subscribeUser(user, mediaType, agoraClient);
+        }
+      });
+
       agoraClient.on("user-unpublished", () => setHostActive(false));
       agoraClient.on("user-left", () => setHostActive(false));
 
@@ -47,12 +56,12 @@ export default function VisorPage() {
       setClient(agoraClient);
       setIsWatching(true);
 
-      // LÓGICA CRUCIAL: Detectar si el mecánico YA está transmitiendo al entrar
+      // Detectar si el mecánico ya estaba transmitiendo al entrar
       if (agoraClient.remoteUsers.length > 0) {
-        const host = agoraClient.remoteUsers[0];
-        if (host.hasVideo) {
-          subscribeUser(host, "video", agoraClient);
-        }
+        agoraClient.remoteUsers.forEach(user => {
+            if (user.hasVideo) subscribeUser(user, "video", agoraClient);
+            if (user.hasAudio) subscribeUser(user, "audio", agoraClient);
+        });
       }
 
     } catch (error) {
@@ -70,9 +79,12 @@ export default function VisorPage() {
     setHostActive(false);
   };
 
-  // Limpiar al desmontar el componente
   useEffect(() => {
-    return () => { if (client) client.leave(); };
+    return () => { 
+      if (client) {
+        client.leave();
+      }
+    };
   }, [client]);
 
   return (
