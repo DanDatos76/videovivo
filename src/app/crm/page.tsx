@@ -1,6 +1,7 @@
-  "use client";
+ "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
+// CORRECCIÓN: Se usa IAgoraRTCRemoteUser en lugar de IRemoteUser
 import AgoraRTC, { IAgoraRTCClient, IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import '../styles/visor.css';
 import { Eye, Radio, ShieldCheck, LogOut, Activity } from 'lucide-react';
@@ -15,13 +16,12 @@ export default function VisorPage() {
   const [client, setClient] = useState<IAgoraRTCClient | null>(null);
   const videoRef = useRef<HTMLDivElement>(null);
 
-  // Función para procesar la señal de video
-  const subscribeUser = async (user: IRemoteUser, mediaType: "video" | "audio", agoraClient: IAgoraRTCClient) => {
+  // CORRECCIÓN: El tipo de dato del 'user' ahora es IAgoraRTCRemoteUser
+  const subscribeUser = async (user: IAgoraRTCRemoteUser, mediaType: "video" | "audio", agoraClient: IAgoraRTCClient) => {
     await agoraClient.subscribe(user, mediaType);
 
     if (mediaType === "video") {
       setHostActive(true);
-      // Pequeño delay para asegurar que React renderizó el div de video
       setTimeout(() => {
         if (videoRef.current) {
           user.videoTrack?.play(videoRef.current);
@@ -47,7 +47,7 @@ export default function VisorPage() {
       setClient(agoraClient);
       setIsWatching(true);
 
-      // LÓGICA CRUCIAL: Detectar si el mecánico YA está transmitiendo al entrar
+      // Detectar si el mecánico ya estaba transmitiendo al entrar
       if (agoraClient.remoteUsers.length > 0) {
         const host = agoraClient.remoteUsers[0];
         if (host.hasVideo) {
@@ -70,9 +70,12 @@ export default function VisorPage() {
     setHostActive(false);
   };
 
-  // Limpiar al desmontar el componente
   useEffect(() => {
-    return () => { if (client) client.leave(); };
+    return () => { 
+      if (client) {
+        client.leave();
+      }
+    };
   }, [client]);
 
   return (
@@ -149,5 +152,4 @@ export default function VisorPage() {
       </main>
     </div>
   );
-
 }
