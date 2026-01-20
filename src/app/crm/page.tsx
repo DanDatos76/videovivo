@@ -1,7 +1,7 @@
   "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
-import AgoraRTC, { IAgoraRTCClient, IRemoteUser } from "agora-rtc-sdk-ng";
+import AgoraRTC, { IAgoraRTCClient, IAgoraRTCRemoteUser } from "agora-rtc-sdk-ng";
 import '../styles/visor.css';
 import { Eye, Radio, ShieldCheck, LogOut, Activity } from 'lucide-react';
 
@@ -149,4 +149,5 @@ export default function VisorPage() {
       </main>
     </div>
   );
+
 }
