@@ -1,0 +1,116 @@
+ .dashboard {
+  padding: 24px;
+}
+
+.dashboard-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* ===================== */
+/* MÉTRICAS SUPERIORES */
+/* ===================== */
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.card-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+}
+
+.card-label {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.card-value {
+  display: block;
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* COLORES */
+.card-blue .card-icon { background-color: #2563eb; }
+.card-green .card-icon { background-color: #16a34a; }
+.card-orange .card-icon { background-color: #f97316; }
+.card-purple .card-icon { background-color: #7c3aed; }
+
+/* ===================== */
+/* SECCIÓN INFERIOR */
+/* ===================== */
+
+.dashboard-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.panel {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.panel-full {
+  grid-column: span 2;
+}
+
+.panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* GRÁFICOS (PLACEHOLDER) */
+.chart-placeholder {
+  height: 220px;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* ACTIVIDAD */
+.activity-feed {
+  list-style: none;
+  padding: 0;
+}
+
+.activity-feed li {
+  font-size: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.activity-feed li:last-child {
+  border-bottom: none;
+}

@@ -1,0 +1,142 @@
+.call-container {
+  width: 100%;
+  height: 100vh;
+  background: #111;
+  color: white;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.join-screen {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.join-card {
+  text-align: center;
+  background: #1e293b;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.btn-join {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* LLAMADA ACTIVA */
+.active-call {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.remote-viewport {
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.video-player-full, .video-player-full div {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+/* MINIATURA LOCAL (Tú) */
+.local-miniature {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 200px;
+  height: 130px;
+  background: #222;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.video-player-mini, .video-player-mini div {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.name-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 11px;
+  background: rgba(0,0,0,0.5);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* CONTROLES */
+.controls-bar {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  background: rgba(30, 41, 59, 0.8);
+  padding: 15px 30px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: #334155;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.control-btn:hover { background: #475569; }
+.control-btn.off { background: #ef4444; }
+.control-btn.hangup { background: #ef4444; width: 60px; height: 60px; }
+.control-btn.hangup:hover { background: #dc2626; transform: scale(1.1); }
+
+/* ESPERA */
+.waiting-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #64748b;
+}
+
+.loader {
+  border: 4px solid #1e293b;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

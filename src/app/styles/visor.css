@@ -1,0 +1,284 @@
+ /* Elimina márgenes internos que puedan venir de los padres */
+.visor-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; /* Ocupa todo el alto del page-content */
+  min-height: 80vh; 
+  background-color: #0b0f1a;
+  color: white;
+  overflow: hidden;
+}
+
+/* El contenedor del stream debe forzar el ancho total */
+.stream-container {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  border-top: 1px solid #1e293b;
+}
+
+/* EL VIDEO: Dale prioridad de espacio */
+.video-viewport {
+  flex: 2; /* Que sea más grande que el sidebar */
+  background: #000;
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* IMPORTANTE: Fuerza a Agora a llenar el div */
+.remote-video-player {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.remote-video-player div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* SIDEBAR: Más elegante y estrecho */
+.stream-sidebar {
+  width: 320px;
+  background: #0f172a;
+  padding: 25px;
+  border-left: 1px solid #1e293b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-item {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.info-item label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 1px;
+}
+
+.info-item span {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* Botón de desconectar abajo */
+.btn-disconnect {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-disconnect:hover {
+  background: #ef4444;
+  color: white;
+}
+
+
+.visor-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #0b0f1a; /* Dark Cinema Background */
+  color: #f8fafc;
+  overflow: hidden;
+}
+
+/* HEADER INTERNO */
+.visor-header {
+  padding: 20px 30px;
+  background: #111827;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1f2937;
+}
+
+.header-left h1 { 
+  font-size: 20px; 
+  margin: 0; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px;
+  letter-spacing: -0.5px;
+}
+
+.live-tag {
+  background: #ef4444;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 900;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.status-pill.online { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid #10b981; }
+.status-pill.offline { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; }
+
+/* LAYOUT PRINCIPAL */
+.visor-main-content {
+  flex: 1;
+  display: flex;
+  width: 100%;
+}
+
+.stream-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* ÁREA DEL VIDEO */
+.video-area {
+  flex: 1; /* Esto hace que el video use todo el espacio sobrante */
+  background: #000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agora-remote-player {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Forzar el video de Agora a llenar el contenedor */
+.agora-remote-player div {
+  width: 500px !important;
+  height: 500px !important;
+}
+
+.video-overlay-info {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.red-dot { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; }
+
+/* SIDEBAR DE INFORMACIÓN */
+.details-sidebar {
+  width: 320px;
+  background: #0f172a;
+  border-left: 1px solid #1f2937;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.details-sidebar h3 {
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+
+.data-row {
+  margin-bottom: 25px;
+}
+
+.data-row label {
+  display: block;
+  font-size: 10px;
+  color: #475569;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.data-row span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.btn-exit {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.btn-exit:hover { background: #ef4444; color: white; border-color: #ef4444; }
+
+/* PANTALLA ESPERA */
+.waiting-signal { text-align: center; color: #334155; }
+.pulse-icon { animation: pulse-gray 2s infinite; margin-bottom: 15px; }
+
+@keyframes pulse-gray {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.2; }
+  100% { transform: scale(1); opacity: 0.5; }
+}
+
+/* BIENVENIDA */
+.welcome-area { flex: 1; display: flex; align-items: center; justify-content: center; }
+.welcome-card {
+  background: #1e293b;
+  padding: 50px;
+  border-radius: 24px;
+  text-align: center;
+  max-width: 400px;
+  border: 1px solid #334155;
+}
+.btn-connect-main {
+  width: 100%;
+  padding: 15px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 25px;
+}

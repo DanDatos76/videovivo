@@ -1,0 +1,483 @@
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-page: #f6f8fb;
+  --bg-card: #ffffff;
+  --text-primary: #0b1324;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --blue: #3b6cff;
+  --blue-bg: #e9efff;
+  --orange: #f59e0b;
+  --orange-bg: #fff3db;
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Quitamos padding para que el video pegue a los bordes */
+  min-width: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  width: 1200px;
+}
+
+.app-root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+ .main {
+  flex: 1;
+  width: 100%;
+  padding: 32px 48px;
+}
+
+/* Header spacing expectation */
+
+ 
+
+/* Titles */
+.content {
+  width: 100%;
+  max-width: none;
+  width: 1200px;
+}
+
+
+.content h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  margin-top: px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+/* Stats */
+
+.stats {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.card-value {
+  margin-top: 6px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.card-sub {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Calendar */
+
+.calendar {
+  margin-top: 32px;
+  background-color: var(--bg-card);
+  border-radius: 18px;
+  padding: 26px 28px 10px;
+  box-shadow: var(--shadow);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.calendar-header span {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.calendar-table {
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 90px 1fr 140px;
+  align-items: center;
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
+}
+
+.row.header {
+  border-top: none;
+  padding-top: 0;
+  padding-bottom: 14px;
+}
+
+.row.header span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.row > span:first-child {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.row strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.row small {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Status badges */
+
+.status {
+  justify-self: flex-end;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-transform: lowercase;
+}
+
+.status.process {
+  background-color: var(--blue-bg);
+  color: var(--blue);
+}
+
+.status.pending {
+  background-color: var(--orange-bg);
+  color: var(--orange);
+}
+
+/* Card internal layout */
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-bottom {
+  margin-top: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.card-number {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Icons */
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.icon.blue {
+  background-color: #3e63c9;
+}
+
+.icon.orange {
+  background-color: #d4920c;
+}
+
+.icon.green {
+  background-color: #35c918;
+}
+
+.icon.purple {
+  background-color: #5928bb;
+}
+
+
+/* ESTRUCTURA BASE */
+.app-root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f3f4f6;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main {
+  padding: 32px;
+}
+
+.content h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+/* BARRA DE ESTADO LIVE (Arriba) */
+.live-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.indicator { width: 10px; height: 10px; border-radius: 50%; }
+.indicator.on { 
+  background: #ef4444; 
+  box-shadow: 0 0 8px #ef4444; 
+  animation: pulse-red 1.5s infinite; 
+}
+.indicator.off { background: #9ca3af; }
+
+@keyframes pulse-red {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ESTADÍSTICAS (Stats) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stat-icon-bg { padding: 10px; border-radius: 12px; }
+.stat-icon-bg.blue { background: #eff6ff; color: #3b82f6; }
+.stat-icon-bg.orange { background: #fff7ed; color: #f97316; }
+.stat-icon-bg.green { background: #ecfdf5; color: #10b981; }
+.stat-icon-bg.purple { background: #f5f3ff; color: #8b5cf6; }
+
+.stat-label { font-size: 12px; color: #6b7280; margin: 0; }
+.stat-val { font-size: 24px; font-weight: 800; color: #111827; margin: 0; }
+
+/* BLOQUES DE CONTENIDO (Calendario y Secciones) */
+.section-block {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.block-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 20px;
+}
+
+/* TABLA DE CALENDARIO */
+.calendar-list .row {
+  display: grid;
+  grid-template-columns: 100px 1fr 140px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f3f4f6;
+  align-items: center;
+}
+.row.header { font-size: 13px; color: #9ca3af; font-weight: 600; }
+.time { font-weight: 700; color: #111827; }
+.details p { font-size: 12px; color: #6b7280; margin: 4px 0 0; }
+
+/* TARJETAS DE SERVICIO (UI) */
+.service-card-ui {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid #f3f4f6;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.service-card-ui h3 { font-size: 15px; margin: 0; color: #111827; }
+.service-card-ui p { font-size: 13px; color: #6b7280; margin: 5px 0; }
+
+.actions { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+
+/* BOTÓN TRANSMITIR (El más importante) */
+.btn-live {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.btn-live:hover { background: #000; transform: translateY(-2px); }
+.btn-live.active { background: #ef4444; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+
+/* BADGES UI */
+.badge-ui { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.badge-ui.blue { background: #dbeafe; color: #1e40af; }
+.badge-ui.orange { background: #ffedd5; color: #9a3412; }
+.badge-ui.green { background: #dcfce7; color: #166534; }
+.badge-ui.purple { background: #f3e8ff; color: #6b21a8; }
+
+/* --- MODAL DE CÁMARA FULLSCREEN (Transmisor) --- */
+.camera-fullscreen {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.98);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+
+.camera-modal-xl {
+  background: #000;
+  width: 95%;
+  max-width: 1200px;
+  height: 90vh;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #333;
+}
+
+.camera-top-bar {
+  padding: 20px 30px;
+  background: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.camera-top-bar.live { background: #ef4444; }
+
+.rec-status { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 14px; letter-spacing: 1px; }
+
+.dot-blink { 
+  width: 12px; height: 12px; background: white; border-radius: 50%; 
+  animation: pulse-white 1s infinite; 
+}
+
+@keyframes pulse-white { 50% { opacity: 0; } }
+
+.btn-close-xl { background: none; border: none; color: white; cursor: pointer; opacity: 0.7; }
+.btn-close-xl:hover { opacity: 1; }
+
+/* CONTENEDOR DEL VIDEO AGORA */
+.video-main-container {
+  flex: 1;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Esto asegura que el video de Agora llene el div */
+.agora-video {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.camera-bottom-bar {
+  padding: 40px;
+  background: #111;
+  text-align: center;
+}
+
+.viewer-info {
+  color: #9ca3af;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* BOTÓN GRANDE DE STOP */
+.btn-main-rec.stop {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 18px 45px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-main-rec.stop:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
