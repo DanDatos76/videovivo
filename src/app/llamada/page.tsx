@@ -1,16 +1,23 @@
-"use client";
+  "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import AgoraRTC, { IAgoraRTCClient, ICameraVideoTrack, IMicrophoneAudioTrack, IRemoteUser } from "agora-rtc-sdk-ng";
+import React, { useState, useRef } from 'react';
+// CORRECCIÓN: Usamos IAgoraRTCRemoteUser en lugar de IRemoteUser
+import AgoraRTC, { 
+  IAgoraRTCClient, 
+  ICameraVideoTrack, 
+  IMicrophoneAudioTrack, 
+  IAgoraRTCRemoteUser 
+} from "agora-rtc-sdk-ng";
 import { Phone, PhoneOff, Mic, MicOff, Video, VideoOff, User } from 'lucide-react';
-import '../styles/llamada.css';
+import './../styles/llamada.css'; // Ajusta la ruta si es necesario
 
 const APP_ID = "abc48027b9684c29af68fb3377af80b5";
 const CHANNEL = "taller-online";
 
 export default function VideollamadaPage() {
   const [joined, setJoined] = useState(false);
-  const [remoteUser, setRemoteUser] = useState<IRemoteUser | null>(null);
+  // CORRECCIÓN: Tipo de dato actualizado aquí también
+  const [remoteUser, setRemoteUser] = useState<IAgoraRTCRemoteUser | null>(null);
   const [micActive, setMicActive] = useState(true);
   const [videoActive, setVideoActive] = useState(true);
 
@@ -27,27 +34,45 @@ export default function VideollamadaPage() {
 
     // Escuchar cuando la otra persona se une
     client.on("user-published", async (user, mediaType) => {
-      await client.subscribe(user, mediaType);
-      if (mediaType === "video") {
-        setRemoteUser(user);
-        setTimeout(() => user.videoTrack?.play(remoteVideoRef.current!), 100);
+      // CORRECCIÓN: Filtro de seguridad para TypeScript (evita error de datachannel)
+      if (mediaType === "video" || mediaType === "audio") {
+        await client.subscribe(user, mediaType);
+        
+        if (mediaType === "video") {
+          setRemoteUser(user);
+          setTimeout(() => {
+            if (remoteVideoRef.current) {
+              user.videoTrack?.play(remoteVideoRef.current);
+            }
+          }, 100);
+        }
+        if (mediaType === "audio") {
+          user.audioTrack?.play();
+        }
       }
-      if (mediaType === "audio") user.audioTrack?.play();
     });
 
     client.on("user-left", () => {
       setRemoteUser(null);
     });
 
-    // Unirse y publicar mi cámara/mic
-    await client.join(APP_ID, CHANNEL, null, null);
-    const tracks = await AgoraRTC.createMicrophoneAndCameraTracks();
-    localTracksRef.current = tracks;
-    
-    await client.publish(tracks);
-    tracks[1].play(localVideoRef.current!);
-    
-    setJoined(true);
+    try {
+      // Unirse y publicar mi cámara/mic
+      await client.join(APP_ID, CHANNEL, null, null);
+      const tracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+      localTracksRef.current = tracks;
+      
+      await client.publish(tracks);
+      
+      if (localVideoRef.current) {
+        tracks[1].play(localVideoRef.current);
+      }
+      
+      setJoined(true);
+    } catch (error) {
+      console.error("Error al unirse a la llamada:", error);
+      alert("No se pudo acceder a la cámara o micrófono.");
+    }
   };
 
   // 2. SALIR DE LA LLAMADA
@@ -65,13 +90,17 @@ export default function VideollamadaPage() {
 
   // 3. CONTROLES DE AUDIO/VIDEO
   const toggleMic = () => {
-    localTracksRef.current?.[0].setEnabled(!micActive);
-    setMicActive(!micActive);
+    if (localTracksRef.current) {
+      localTracksRef.current[0].setEnabled(!micActive);
+      setMicActive(!micActive);
+    }
   };
 
   const toggleVideo = () => {
-    localTracksRef.current?.[1].setEnabled(!videoActive);
-    setVideoActive(!videoActive);
+    if (localTracksRef.current) {
+      localTracksRef.current[1].setEnabled(!videoActive);
+      setVideoActive(!videoActive);
+    }
   };
 
   return (
@@ -102,7 +131,7 @@ export default function VideollamadaPage() {
           {/* VIDEO LOCAL (Yo - Miniatura) */}
           <div className="local-miniature">
             <div ref={localVideoRef} className="video-player-mini" />
-            {!videoActive && <div className="video-off-placeholder"><User /></div>}
+            {!videoActive && <div className="video-off-placeholder"><User size={40} /></div>}
             <span className="name-tag">Tú</span>
           </div>
 
