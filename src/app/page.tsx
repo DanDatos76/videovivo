@@ -1,14 +1,16 @@
  "use client";
 
-import "./styles/login.css";
+import React from "react"; // 1. Importación necesaria
 import { useRouter } from "next/navigation";
+import "./styles/login.css"; // Ajusta esta ruta si tu CSS está en otro lado
 
 export default function Login() {
   const router = useRouter();
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // evita recargar la página
-    router.push("/inicio"); // redirige a /inicio
+  // 2. CORRECCIÓN CLAVE: Se agrega ": React.FormEvent"
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); 
+    router.push("/inicio"); 
   };
 
   return (
@@ -21,8 +23,8 @@ export default function Login() {
             className="login-illustration"
           />
           <p className="login-description">
-             La vida con una moto
-Conducir es una pasión y te sientes libre del Mundo.
+            La vida con una moto
+            Conducir es una pasión y te sientes libre del Mundo.
           </p>
         </div>
 
@@ -32,10 +34,10 @@ Conducir es una pasión y te sientes libre del Mundo.
 
           <form onSubmit={handleSubmit}>
             <label>Usuario</label>
-            <input type="text" />
+            <input type="text" required />
 
             <label>Contraseña</label>
-            <input type="password" />
+            <input type="password" required />
 
             <button type="submit">Iniciar sesión</button>
           </form>
